@@ -60,8 +60,6 @@ if __name__ == '__main__':
     ip_lb_name = os.getenv('iplb_name')
     input_domain_list = parse_command_line()
 
-    loadBalancerUpdaterSSL = LoadBalancerSSLManager(ip_lb_name=ip_lb_name)
-
     if os.getenv('DEBUG'):
         with open('/etc/dehydrated/config', 'a') as config:
             config.write('CA="https://acme-staging.api.letsencrypt.org/directory"\n')
