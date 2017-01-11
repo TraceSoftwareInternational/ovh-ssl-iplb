@@ -2,6 +2,7 @@
 
 [![](https://images.microbadger.com/badges/image/tracesoftware/ovh-ssl-iplb.svg)](https://microbadger.com/images/tracesoftware/ovh-ssl-iplb "Get your own image badge on microbadger.com")
 [![License: GPL v3](https://img.shields.io/badge/License-GPL%20v3-blue.svg)](http://www.gnu.org/licenses/gpl-3.0)
+[![Scrutinizer Code Quality](https://scrutinizer-ci.com/g/TraceSoftwareInternational/ovh-ssl-iplb/badges/quality-score.png?b=master)](https://scrutinizer-ci.com/g/TraceSoftwareInternational/ovh-ssl-iplb/?branch=master)
 
 This repo contains a way to generate SSL certificate (with Let's Encrypt) and add it automatically to your IPLB instance.
 To do that, the domain you want to get SSL certificates must be managed by OVH.
@@ -57,4 +58,14 @@ You must configure this script by setting some environments variables:
 To found `application_key`, `application_secret` and `consumer_key` you should check [this ovh documenation](https://api.ovh.com/g934.first_step_with_api) and [this page](https://api.ovh.com/createToken/).
 Your credentials must have access to:
 
-* list not defined yet
+* DNS
+    * `GET /domain/zone`
+    * `POST /domain/zone/*/refresh`
+    * `POST /domain/zone/*/record/*`
+    * `DELETE /domain/zone/*/record/*`
+* IPLB
+    * `GET /ipLoadbalancing`
+    * `GET /ipLoadbalancing/*/ssl`
+    * `GET /ipLoadbalancing/*/ssl/*`
+    * `POST /ipLoadbalancing/*/ssl`
+    * `DELETE /ipLoadbalancing/*/ssl/*`
