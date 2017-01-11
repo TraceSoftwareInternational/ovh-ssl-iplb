@@ -1,11 +1,14 @@
 # Automatic generation of Let's Encrypt certificate on OVH IP LoadBalancer Next gen 
 
+[![](https://images.microbadger.com/badges/image/tracesoftware/ovh-ssl-iplb.svg)](https://microbadger.com/images/tracesoftware/ovh-ssl-iplb "Get your own image badge on microbadger.com")
+[![License: GPL v3](https://img.shields.io/badge/License-GPL%20v3-blue.svg)](http://www.gnu.org/licenses/gpl-3.0)
+
 This repo contains a way to generate SSL certificate (with Let's Encrypt) and add it automatically to your IPLB instance.
 To do that, the domain you want to get SSL certificates must be managed by OVH.
 
 ## Usage
 
-To use that tool, we provide an docker container [tracesoftware/ovh-ssl-iplb]().
+To use that tool, we provide an docker container [tracesoftware/ovh-ssl-iplb](https://hub.docker.com/r/tracesoftware/ovh-ssl-iplb/).
 
 To run it, you should just define some environments variables:
 ````
