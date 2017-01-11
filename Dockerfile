@@ -7,6 +7,8 @@ RUN apk update && \
 RUN curl -o /usr/bin/dehydrated https://raw.githubusercontent.com/lukas2511/dehydrated/master/dehydrated && \
     chmod +x /usr/bin/dehydrated
 
+COPY dehydrated.conf /etc/dehydrated/config
+
 WORKDIR "/home/working"
 COPY src .
 

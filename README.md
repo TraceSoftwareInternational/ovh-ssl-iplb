@@ -59,13 +59,13 @@ To found `application_key`, `application_secret` and `consumer_key` you should c
 Your credentials must have access to:
 
 * DNS
-    * `GET /domain/zone`
-    * `POST /domain/zone/*/refresh`
-    * `POST /domain/zone/*/record/*`
-    * `DELETE /domain/zone/*/record/*`
+    * `GET      /domain/zone`
+    * `POST     /domain/zone/*/record`
+    * `POST     /domain/zone/*/refresh`
+    * `DELETE   /domain/zone/*/record/*`
 * IPLB
-    * `GET /ipLoadbalancing`
-    * `GET /ipLoadbalancing/*/ssl`
-    * `GET /ipLoadbalancing/*/ssl/*`
-    * `POST /ipLoadbalancing/*/ssl`
-    * `DELETE /ipLoadbalancing/*/ssl/*`
+    * `GET      /ipLoadbalancing`
+    * `GET      /ipLoadbalancing/*/ssl`
+    * `POST     /ipLoadbalancing/*/ssl`
+    * `GET      /ipLoadbalancing/*/ssl/*`
+    * `DELETE   /ipLoadbalancing/*/ssl/*`

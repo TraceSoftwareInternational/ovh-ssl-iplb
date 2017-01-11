@@ -18,7 +18,7 @@ logger.addHandler(logging.StreamHandler())
 
 if os.getenv('DEBUG'):
     logger.setLevel(logging.DEBUG)
-    logger.debug("DEBUG MODE".center(100, '-'))
+    logger.debug("DEBUG MODE".center(150, '-'))
 else:
     logger.setLevel(logging.INFO)
 

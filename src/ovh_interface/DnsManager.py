@@ -50,13 +50,13 @@ class DnsManager(InterfaceBase):
 
         basedomain, subdomain = self._split_create_domain_challenge(domain)
 
-        dns_entry = self.ovh_client.post('/domain/zone/%s/record' % basedomain,
+        dns_entry = self.ovh_client.post('/domain/zone/{}/record'.format(basedomain),
                                          fieldType="TXT",
                                          subDomain=subdomain,
                                          ttl=0,
                                          target=value
                                          )
-        self.ovh_client.post('/domain/zone/%s/refresh' % basedomain)
+        self.ovh_client.post('/domain/zone/{}/refresh'.format(basedomain))
         self.logger.info("DNS challenge was added for domain: {}".format(basedomain))
         self.logger.debug("{}.{} with value ({}) was written".format(subdomain, basedomain, value))
 
@@ -70,8 +70,8 @@ class DnsManager(InterfaceBase):
         """
 
         basedomain, _ = self._split_create_domain_challenge(domain)
-        self.ovh_client.delete('/domain/zone/%s/record/%s' % (basedomain, id_record))
-        self.ovh_client.post('/domain/zone/%s/refresh' % basedomain)
+        self.ovh_client.delete('/domain/zone/{}/record/{}'.format(basedomain, id_record))
+        self.ovh_client.post('/domain/zone/{}/refresh'.format(basedomain))
 
         self.logger.info("Clean DNS entry for domain: {}".format(basedomain))
         self.logger.debug("DNS entry {} in {} was deleted".format(id_record, basedomain))
