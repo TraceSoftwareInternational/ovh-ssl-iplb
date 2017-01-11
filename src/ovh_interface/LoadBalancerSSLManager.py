@@ -76,9 +76,9 @@ class LoadBalancerSSLManager:
 
         try:
             result = self.ovh_client.post('/ipLoadbalancing/{}/ssl'.format(self.ip_lb_name),
-                                          certificate=certif,
-                                          key=privatekey,
-                                          chain=chain
+                                          certificate=certif.strip(),
+                                          key=privatekey.strip(),
+                                          chain=chain.strip()
                                           )
         except (ovh.exceptions.BadParametersError, ovh.exceptions.ResourceConflictError) as err:
             self.logger.error('Impossible to add certificate. err: {}'.format(err))
