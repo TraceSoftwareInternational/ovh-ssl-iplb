@@ -3,12 +3,11 @@
 
 import ovh
 import re
-import logging
-import os
 from pathlib import Path
+from ovh_interface.InterfaceBase import InterfaceBase
 
 
-class LoadBalancerSSLManager:
+class LoadBalancerSSLManager(InterfaceBase):
     """
     Class which manage SSL in ovh IPLB
     """
@@ -19,24 +18,7 @@ class LoadBalancerSSLManager:
         :type ip_lb_name: The name of ip LB you want to work with
         :param ovh_client: the obvh client you want to use. If none use environment variable to initialize the ovh client.
         """
-
-        if ovh_client is None:
-            self.ovh_client = ovh.Client(endpoint=os.getenv('endpoint', 'ovh-eu'),
-                                         application_key=os.getenv('application_key'),
-                                         application_secret=os.getenv('application_secret'),
-                                         consumer_key=os.getenv('consumer_key')
-                                         )
-        else:
-            self.ovh_client = ovh_client
-
-        self.logger = logging.getLogger(__name__)
-        self.logger.addHandler(logging.StreamHandler())
-
-        if os.getenv('DEBUG'):
-            self.logger.setLevel(logging.DEBUG)
-        else:
-            self.logger.setLevel(logging.INFO)
-
+        InterfaceBase.__init__(self, ovh_client)
         self.ip_lb_name = ip_lb_name
 
     def get_certificate_managed_by_ip_lb(self):

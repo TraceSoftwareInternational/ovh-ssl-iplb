@@ -34,7 +34,7 @@ def renew_certificate(domain: str) -> bool:
     :return: True if certificated getted and added in IP LB with success
     """
 
-    logger.info("Renew certificate for {}".format(domain))
+    logger.info("Start process for {}".format(domain).center(150, '-'))
     command_result = subprocess.run(args=['dehydrated', '-c', '-d', domain, '-k', './ovhDnsHook.py', '-t', 'dns-01'], stdout=subprocess.PIPE)
     return True if command_result.returncode == 0 else False
 
@@ -60,6 +60,8 @@ if __name__ == '__main__':
     ip_lb_name = os.getenv('iplb_name')
     input_domain_list = parse_command_line()
 
+    loadBalancerUpdaterSSL = LoadBalancerSSLManager(ip_lb_name=ip_lb_name)
+
     if os.getenv('DEBUG'):
         with open('/etc/dehydrated/config', 'a') as config:
             config.write('CA="https://acme-staging.api.letsencrypt.org/directory"\n')
@@ -84,10 +86,12 @@ if __name__ == '__main__':
         if not os.path.exists('failedRenew.log'):
             break
 
+        logger.info("Retry process (count: {})".format(retry_count+1).center(150, '-'))
+
         with open('failedRenew.log', 'r') as failedDomain:
             domains = failedDomain.readlines()
         os.remove('failedRenew.log')
 
-        logger.info("Domain retry (count: {}): {}".format(retry_count+1, domains))
+        logger.info("List of domain to retry: {}".format(retry_count+1, domains))
         for domain in domains:
             renew_certificate(domain)

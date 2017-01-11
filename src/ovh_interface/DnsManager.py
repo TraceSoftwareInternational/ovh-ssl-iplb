@@ -1,12 +1,10 @@
 #!/usr/bin/env python
 # -*- encoding: utf-8 -*-
 
-import ovh
-import os
-import logging
+from ovh_interface.InterfaceBase import InterfaceBase
 
 
-class DnsManager:
+class DnsManager(InterfaceBase):
     """
     This class provide an easy object way to interact with OVH DNS API
     """
@@ -14,24 +12,9 @@ class DnsManager:
     def __init__(self, ovh_client=None):
         """
         Constructor
-        :param ovh_client: the obvh client you want to use. If none use environment variable to initialize the ovh client.
+        :param ovh_client: the ovh client you want to use. If none use environment variable to initialize the ovh client.
         """
-        if ovh_client is None:
-            self.ovh_client = ovh.Client(endpoint=os.getenv('endpoint', 'ovh-eu'),
-                                         application_key=os.getenv('application_key'),
-                                         application_secret=os.getenv('application_secret'),
-                                         consumer_key=os.getenv('consumer_key')
-                                         )
-        else:
-            self.ovh_client = ovh_client
-
-        self.logger = logging.getLogger(__name__)
-        self.logger.addHandler(logging.StreamHandler())
-
-        if os.getenv('DEBUG'):
-            self.logger.setLevel(logging.DEBUG)
-        else:
-            self.logger.setLevel(logging.INFO)
+        InterfaceBase.__init__(self, ovh_client)
 
     def get_dns_zone_manageable(self):
         """
